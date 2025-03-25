@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
-import { IoSearchSharp } from "react-icons/io5";
+import { FaSearch } from "react-icons/fa";
 
 const Search: React.FC = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const Search: React.FC = () => {
       onChange={(e) => setSearchTerm(e.target.value)}
       placeholder="Search for books"
       className="bg-white w-80 h-8 rounded-2xl border-transparent mt-2 md:mt-0"
-      icon={<IoSearchSharp />}
+        icon={<FaSearch color="#0B1A8E" size={16} />}
       iconPosition="left"
     />
     </>
