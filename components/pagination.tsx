@@ -29,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
         <div className="flex items-center justify-center gap-2 mt-5">
             <Button
                 variant="outline"
-                className={`px-3 lg:px-4 py-2 border border-[#1F2445] rounded-xl ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+                className={`px-3 lg:px-4 py-2 border border-[#1F2445] rounded-xl cursor-pointer ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
                 disabled={currentPage === 1}
                 onClick={() => {
                     if (currentPage > 1) {
@@ -53,7 +53,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
 
             <Button
                 variant="outline"
-                className={`px-3 lg:px-4 py-2 border border-[#1F2445] rounded-xl ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+                className={`px-3 lg:px-4 py-2 border border-[#1F2445] rounded-xl cursor-pointer ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
                 disabled={currentPage === totalPages}
                 onClick={() => {
                     if (currentPage < totalPages) {

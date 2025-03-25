@@ -32,6 +32,7 @@ const Search: React.FC = () => {
   }, [searchTerm]);
 
   return (
+    <>
     <Input
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
@@ -40,6 +41,7 @@ const Search: React.FC = () => {
       icon={<IoSearchSharp />}
       iconPosition="left"
     />
+    </>
   );
 };
 
