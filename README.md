@@ -37,15 +37,6 @@ Quando um gênero é selecionado na página inicial, o usuário é redirecionado
 - **Responsividade**:
    - O layout é totalmente responsivo, adaptando-se a diferentes tamanhos de tela usando **Tailwind CSS**.
 
-## Instalação
-
-Para rodar o projeto localmente, siga as instruções abaixo:
-
-### 1. Clonar o Repositório
-
-```bash
-git clone https://github.com/MarcelloFreitasMoraes/bloom-books.git
-```
 
 ## ⚙️ Como Rodar o Projeto
 
