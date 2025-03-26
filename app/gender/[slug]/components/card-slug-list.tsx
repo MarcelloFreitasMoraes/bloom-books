@@ -16,16 +16,16 @@ const CardSlugLine: React.FC<CardSlugLineProps> = ({ data }) => {
                 data.map((item) => {
                     return (
                         <div key={item.rank} className="flex gap-4 py-4 pl-6">
-                            <div className="w-full sm:w-[147px] lg:h-[167px] h-[153px]">
+                            <div className="w-full sm:w-[120px] lg:h-[167px] h-[153px]">
                                 <Image
-                                    className="w-[147px] h-[153px] lg:h-[167px]"
+                                    className="w-[120px] h-[153px] lg:h-[167px]"
                                     src={item.book_image}
                                     alt={item.title}
                                     width={167}
                                     height={167}
                                 />
                             </div>
-                            <div className="flex flex-col gap-2 ml-2 sm:ml-10">
+                            <div className="flex flex-col gap-2 ml-2 lg:ml-10">
                                 <div className='flex flex-col lg:items-center gap-1 lg:flex-row'>
                                     <h2 className="text-[#0E1337] text-base font-bold leading-snug">{item.title}</h2>
                                     <div className='flex gap-1 items-center'>

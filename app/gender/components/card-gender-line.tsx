@@ -11,8 +11,9 @@ const slugify = (text: string) =>
 
 const GenderLine: React.FC<GenderLineProps> = ({ data, url }) => {
     return (
-        <>
-            {data?.map((item) => {
+        <div className="w-full">
+            {data.length > 0 ? (
+                data.map((item) => {
                 const slug = slugify(item.list_name);
                 return (
                     <div key={item.list_name} className="grid grid-cols-1 lg:grid-cols-3 gap-1 my-5 lg:gap-4 lg:my-10 items-center lg:pb-4">
@@ -29,9 +30,12 @@ const GenderLine: React.FC<GenderLineProps> = ({ data, url }) => {
                             Publicação mais antiga {new Date(item.newest_published_date).toLocaleDateString('pt-BR')}
                         </p>
                     </div>
-                );
-            })}
-        </>
+                    )
+                })
+            ) : (
+                <p className="text-black font-normal text-xl">Nenhum resultado encontrado.</p>
+            )}
+        </div>
     );
 };
 
