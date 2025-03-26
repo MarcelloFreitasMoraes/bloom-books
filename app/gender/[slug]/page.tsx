@@ -16,7 +16,7 @@ interface SlugProps {
 }
 
 export default async function Slug({ params, searchParams }: SlugProps) {
-    const { slug } = params;
+    const { slug } = await params;
     const decodedSlug = decodeURIComponent(slug);
 
     const currentPage = searchParams && typeof (await searchParams).page === "string" ? Number((await searchParams).page) : 1;

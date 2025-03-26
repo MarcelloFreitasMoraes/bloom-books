@@ -14,23 +14,21 @@ const CardSlugLine: React.FC<CardSlugLineProps> = ({ data }) => {
         <>
             {data.length > 0 ? (
                 data.map((item) => {
-                    console.log(item);
-
                     return (
                         <div key={item.rank} className="flex gap-4 py-4 pl-6">
-                            <div className="w-[107px] lg:w-[140px] lg:h-[167px]">
+                            <div className="w-full sm:w-[147px] lg:h-[167px] h-[153px]">
                                 <Image
-                                    className="w-[107px] lg:w-[167px]2 h-[107px] lg:h-[167px]"
+                                    className="w-[147px] h-[153px] lg:h-[167px]"
                                     src={item.book_image}
                                     alt={item.title}
-                                    width={120}
-                                    height={120}
+                                    width={167}
+                                    height={167}
                                 />
                             </div>
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 ml-2 sm:ml-10">
                                 <div className='flex flex-col lg:items-center gap-1 lg:flex-row'>
                                     <h2 className="text-[#0E1337] text-base font-bold leading-snug">{item.title}</h2>
-                                    <div className='flex gap-2 items-center'>
+                                    <div className='flex gap-1 items-center'>
                                         <p className="text-{#454A67] font-normal text-sm leading-normal">{item.contributor}
                                         </p>
                                         <Favorite item={item} />

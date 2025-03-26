@@ -1,16 +1,11 @@
 'use client';
+import { Book } from '@/app/@types/types';
 import { useFavoriteStore } from '@/app/constants/useFavoriteStore';
 import React, { useEffect } from 'react';
 import { GoStar, GoStarFill } from 'react-icons/go';
 
 interface FavoriteProps {
-    item: {
-        primary_isbn10: string;
-        title: string;
-        contributor: string;
-        book_image: string;
-        buy_links: { url: string }[];
-    };
+    item: Book
 }
 
 const Favorite: React.FC<FavoriteProps> = ({ item }) => {

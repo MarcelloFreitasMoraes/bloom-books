@@ -44,7 +44,7 @@ const GenderPage = async ({ searchParams }: GenderPageProps) => {
     currentPage * itemsPerPage
   );
 
-  const url = `page=${1}&limit=${5}&list=${list}&grid=${grid}&name=${name}`
+  const url = `page=${1}&limit=${5}&list=${list}&grid=${grid}`
 
   return (
     <div>

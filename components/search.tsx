@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FaSearch } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
 
 const Search: React.FC = () => {
   const router = useRouter();
@@ -14,6 +14,13 @@ const Search: React.FC = () => {
   const limit = searchParams.get("limit") || "5";
 
   const [searchTerm, setSearchTerm] = useState(searchParams.get("name") || "");
+
+  useEffect(() => {
+    const name = searchParams.get("name");
+    if (name === null) {
+      setSearchTerm("");
+    }
+  }, [searchParams])
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -36,9 +43,9 @@ const Search: React.FC = () => {
     <Input
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      placeholder="Search for books"
+        placeholder="Pesquise aqui..."
       className="bg-white w-80 h-8 rounded-2xl border-transparent mt-2 md:mt-0"
-        icon={<FaSearch color="#0B1A8E" size={16} />}
+        icon={<FiSearch color="#0B1A8E" size={16} />}
       iconPosition="left"
     />
     </>

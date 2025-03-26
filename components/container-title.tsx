@@ -16,12 +16,25 @@ const ContainerTitle: React.FC = () => {
   const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value
     router.push(`${pathname}?page=${page}&limit=${newLimit}&list=${list}&grid=${grid}`)
+
   }
+  const slug = pathname.split('/').pop();
+  const decodedSlug = slug ? decodeURIComponent(slug) : '';
+
+  const formatSlug = (slug: string) => {
+    return slug
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  const formattedSlug = formatSlug(decodedSlug);
 
   return (
     <div className='h-16 bg-[#F2F3F8] flex items-center justify-between px-4 lg:px-16 lg:mb-10'>
       <div>
-        <h2 className='text-2xl text-[#010311]'>Gêneros</h2>
+        <h2 className='text-2xl text-[#010311] max-sm:hidden'>{formattedSlug === 'Gender' ? 'Gêneros' : formattedSlug}</h2>
+        <h2 className='text-2xl text-[#010311] sm:hidden'>{formattedSlug === 'Gender' ? 'Gêneros' : formattedSlug.slice(0, 15) + '...'}</h2>
       </div>
       <div className='flex items-center gap-4 font-bold'>
         <div className='text-xs font-normal flex items-center gap-2'>
