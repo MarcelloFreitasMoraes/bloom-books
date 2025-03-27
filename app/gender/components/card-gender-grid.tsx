@@ -17,7 +17,7 @@ const GenderGrid: React.FC<GenderGridProps> = ({ data, url }) => {
 
                 {data.length > 0 ? (
                     data.map((item) => {
-                        const slug = slugify(item.list_name); // Corrigido: mover dentro do map
+                        const slug = slugify(item.list_name); 
                         return (
                             <div key={item.list_name} className="flex flex-col h-full">
                                 <div className="flex flex-col gap-1">

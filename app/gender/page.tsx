@@ -2,6 +2,7 @@ import GenderLine from "./components/card-gender-line";
 import fetchGender from "../service/get-gender";
 import Pagination from "@/components/pagination";
 import GenderGrid from "./components/card-gender-grid";
+import { ITEMS_LIMIT, PAGE } from "../utils/items-limit";
 
 interface GenderPageProps {
   searchParams: Promise<{
@@ -14,8 +15,8 @@ interface GenderPageProps {
 }
 
 const GenderPage = async ({ searchParams }: GenderPageProps) => {
-  const currentPage = searchParams && typeof (await searchParams).page === "string" ? Number((await searchParams).page) : 1;
-  const itemsPerPage = searchParams && typeof (await searchParams).limit === "string" ? Number((await searchParams).limit) : 5;
+  const currentPage = searchParams && typeof (await searchParams).page === "string" ? Number((await searchParams).page) : PAGE;
+  const itemsPerPage = searchParams && typeof (await searchParams).limit === "string" ? Number((await searchParams).limit) : ITEMS_LIMIT;
   const name =
     searchParams && typeof (await searchParams).name === "string"
       ? (await searchParams).name?.toLowerCase() ?? ""
@@ -44,14 +45,14 @@ const GenderPage = async ({ searchParams }: GenderPageProps) => {
     currentPage * itemsPerPage
   );
 
-  const url = `page=${1}&limit=${5}&list=${list}&grid=${grid}`
+  const url = `page=${PAGE}&limit=${ITEMS_LIMIT}&list=${list}&grid=${grid}`
 
   return (
     <div>
       {list && <GenderLine data={paginatedResults} url={url} />}
       {grid && <GenderGrid data={paginatedResults} url={url} />}
 
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
     </div>
   );
 };

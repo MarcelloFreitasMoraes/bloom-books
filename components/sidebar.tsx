@@ -40,20 +40,22 @@ export default function Sidebar() {
           <h2 className="text-lg font-bold mb-3 text-[#0B1A8E]">Favoritos</h2>
 
           {favorites.length > 0 ? (
-            <ul className="space-y-2">
-              {favorites.map((book) => (
-                <li key={book.primary_isbn10} className="py-2 flex gap-4">
-                  <Image src={book.book_image} alt={book.title} width={50} height={50} />
-                  <div className="gap-1">
-                    <h4 className="text-sm font-bold text-[#0E1337]">{book.title}</h4>
-                    <div className="flex items-center gap-1">
-                      <p className="text-xs text-[#454A67] font-normal">{book.contributor}</p>
-                      <Favorite item={book} />
+            <div className="max-h-[80vh] overflow-y-auto pr-1">
+              <ul className="space-y-2">
+                {favorites.map((book) => (
+                  <li key={book.primary_isbn10} className="py-2 flex gap-4">
+                    <Image src={book.book_image} alt={book.title} width={50} height={50} />
+                    <div className="gap-1">
+                      <h4 className="text-sm font-bold text-[#0E1337]">{book.title}</h4>
+                      <div className="flex items-center gap-1">
+                        <p className="text-xs text-[#454A67] font-normal">{book.contributor}</p>
+                        <Favorite item={book} />
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : (
             <p className="text-sm text-[#454A67]">Nenhum favorito adicionado.</p>
           )}

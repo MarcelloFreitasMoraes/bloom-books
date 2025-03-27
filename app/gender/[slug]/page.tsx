@@ -2,6 +2,7 @@ import fetchBooks from "@/app/service/get-lists";
 import Pagination from "@/components/pagination";
 import CardSlugLine from "./components/card-slug-list";
 import CardSlugGrid from "./components/card-slug-grid";
+import { ITEMS_LIMIT, PAGE } from "@/app/utils/items-limit";
 
 interface SlugProps {
     searchParams: Promise<{
@@ -19,8 +20,8 @@ export default async function Slug({ params, searchParams }: SlugProps) {
     const { slug } = await params;
     const decodedSlug = decodeURIComponent(slug);
 
-    const currentPage = searchParams && typeof (await searchParams).page === "string" ? Number((await searchParams).page) : 1;
-    const itemsPerPage = searchParams && typeof (await searchParams).limit === "string" ? Number((await searchParams).limit) : 5;
+    const currentPage = searchParams && typeof (await searchParams).page === "string" ? Number((await searchParams).page) : PAGE;
+    const itemsPerPage = searchParams && typeof (await searchParams).limit === "string" ? Number((await searchParams).limit) : ITEMS_LIMIT;
     const name =
         searchParams && typeof (await searchParams).name === "string"
             ? (await searchParams).name?.toLowerCase() ?? ""
@@ -62,7 +63,7 @@ export default async function Slug({ params, searchParams }: SlugProps) {
             {list && <CardSlugLine data={paginatedResults} />}
             {grid && <CardSlugGrid data={paginatedResults} />}
             <div className="mb-10">
-                <Pagination currentPage={currentPage} totalPages={totalPages} />
+                {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
             </div>
         </section>
     );

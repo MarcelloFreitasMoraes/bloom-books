@@ -1,9 +1,9 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
+import { ITEMS_LIMIT, PAGE } from "@/app/utils/items-limit";
 
 const Search: React.FC = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ const Search: React.FC = () => {
 
   const list = searchParams.get("list") || "true";
   const grid = searchParams.get("grid") || "false";
-  const limit = searchParams.get("limit") || "5";
+  const limit = searchParams.get("limit") || `${ITEMS_LIMIT}`;
 
   const [searchTerm, setSearchTerm] = useState(searchParams.get("name") || "");
 
@@ -25,7 +25,7 @@ const Search: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       const params = new URLSearchParams({
-        page: "1",
+        page: `${PAGE}`,
         limit,
         list,
         grid,
@@ -33,21 +33,21 @@ const Search: React.FC = () => {
       });
 
       router.replace(`?${params.toString()}`);
-    }, 300); 
+    }, 300);
 
-    return () => clearTimeout(timeout); 
+    return () => clearTimeout(timeout);
   }, [searchTerm]);
 
   return (
     <>
-    <Input
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
+      <Input
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Pesquise aqui..."
-      className="bg-white w-80 h-8 rounded-2xl border-transparent mt-2 md:mt-0"
+        className="bg-white w-80 h-8 rounded-2xl border-transparent mt-2 md:mt-0"
         icon={<FiSearch color="#0B1A8E" size={16} />}
-      iconPosition="left"
-    />
+        iconPosition="left"
+      />
     </>
   );
 };

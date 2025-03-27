@@ -1,8 +1,15 @@
 'use client'
+import { formatSlug } from '@/app/utils/format-slug';
+import { ITEMS_LIMIT, ITEMS_LIMIT_OPTIONS, PAGE } from '@/app/utils/items-limit';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { IoGridSharp } from 'react-icons/io5';
+
+const ICON_COLOR = {
+  active: '#5062F0',
+  inactive: '#D0D3E2',
+}
 
 const ContainerTitle: React.FC = () => {
   const router = useRouter()
@@ -10,25 +17,21 @@ const ContainerTitle: React.FC = () => {
   const searchParams = useSearchParams()
   const list = searchParams.get('list') === 'true'
   const grid = searchParams.get('grid') === 'true'
-  const limit = searchParams.get('limit') || 5
-  const page = searchParams.get('page') || 1
+  const limit = searchParams.get('limit') || ITEMS_LIMIT
+  const page = searchParams.get('page') || PAGE
+
+  const slug = pathname.split('/').pop();
+  const decodedSlug = slug ? decodeURIComponent(slug) : '';
+  const formattedSlug = formatSlug(decodedSlug);
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value
-    router.push(`${pathname}?page=${page}&limit=${newLimit}&list=${list}&grid=${grid}`)
-
-  }
-  const slug = pathname.split('/').pop();
-  const decodedSlug = slug ? decodeURIComponent(slug) : '';
-
-  const formatSlug = (slug: string) => {
-    return slug
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    router.push(`${pathname}?page=${PAGE}&limit=${newLimit}&list=${list}&grid=${grid}`)
   }
 
-  const formattedSlug = formatSlug(decodedSlug);
+  const handleViewChange = (list: boolean, grid: boolean) => {
+    router.push(`${pathname}?page=${page}&limit=${limit}&list=${list}&grid=${grid}`)
+  }
 
   return (
     <div className='h-16 bg-[#F2F3F8] flex items-center justify-between px-4 lg:px-16 lg:mb-10'>
@@ -44,23 +47,23 @@ const ContainerTitle: React.FC = () => {
             value={limit}
             onChange={handleLimitChange}
           >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
+            {ITEMS_LIMIT_OPTIONS.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}  
           </select>
           <span className='hidden sm:block'>por vez</span>
         </div>
         <div className='flex gap-1'>
           <AiOutlineMenu
-            color={list ? '#5062F0' : '#D0D3E2'}
+            color={list ? ICON_COLOR.active : ICON_COLOR.inactive}
             size={20}
-            onClick={() => router.push(`${pathname}?page=${page}&limit=${limit}&list=true&grid=false`)}
+            onClick={() => handleViewChange(true, false)}
             className='cursor-pointer'
           />
           <IoGridSharp
-            color={grid ? '#5062F0' : '#D0D3E2'}
+            color={grid ? ICON_COLOR.active : ICON_COLOR.inactive}
             size={20}
-            onClick={() => router.push(`${pathname}?page=${page}&limit=${limit}&list=false&grid=true`)}
+            onClick={() => handleViewChange(false, true)}
             className='cursor-pointer'
           />
         </div>
