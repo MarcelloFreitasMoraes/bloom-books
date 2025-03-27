@@ -19,6 +19,7 @@ const ContainerTitle: React.FC = () => {
   const grid = searchParams.get('grid') === 'true'
   const limit = searchParams.get('limit') || ITEMS_LIMIT
   const page = searchParams.get('page') || PAGE
+  const name = searchParams.get("name");
 
   const slug = pathname.split('/').pop();
   const decodedSlug = slug ? decodeURIComponent(slug) : '';
@@ -26,11 +27,11 @@ const ContainerTitle: React.FC = () => {
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = event.target.value
-    router.push(`${pathname}?page=${PAGE}&limit=${newLimit}&list=${list}&grid=${grid}`)
+    router.push(`${pathname}?page=${PAGE}&limit=${newLimit}&list=${list}&grid=${grid}&name=${name}`)
   }
 
   const handleViewChange = (list: boolean, grid: boolean) => {
-    router.push(`${pathname}?page=${page}&limit=${limit}&list=${list}&grid=${grid}`)
+    router.push(`${pathname}?page=${page}&limit=${limit}&list=${list}&grid=${grid}&name=${name}`)
   }
 
   return (

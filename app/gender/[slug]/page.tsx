@@ -3,17 +3,17 @@ import Pagination from "@/components/pagination";
 import CardSlugLine from "./components/card-slug-list";
 import CardSlugGrid from "./components/card-slug-grid";
 import { ITEMS_LIMIT, PAGE } from "@/app/utils/items-limit";
+import { Suspense } from "react";
 
 interface SlugProps {
+    params: Promise<{ slug: string }>;
     searchParams: Promise<{
         page?: string;
         limit?: string;
         list?: string;
         grid?: string;
         name?: string;
-        slug?: string;
     }>
-    params: { slug: string };
 }
 
 export default async function Slug({ params, searchParams }: SlugProps) {
@@ -60,11 +60,13 @@ export default async function Slug({ params, searchParams }: SlugProps) {
 
     return (
         <section>
-            {list && <CardSlugLine data={paginatedResults} />}
-            {grid && <CardSlugGrid data={paginatedResults} />}
-            <div className="mb-10">
-                {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
-            </div>
+            <Suspense>
+                {list && <CardSlugLine data={paginatedResults} />}
+                {grid && <CardSlugGrid data={paginatedResults} />}
+                <div className="mb-10">
+                    {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
+                </div>
+            </Suspense>
         </section>
     );
 }

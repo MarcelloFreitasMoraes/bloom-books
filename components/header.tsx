@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ContainerTitle from './container-title';
 import Search from './search';
 import Link from 'next/link';
@@ -13,10 +13,14 @@ const Header: React.FC = () => {
                     <Link href={`/gender?page=${PAGE}&limit=${ITEMS_LIMIT}&list=true&grid=false`} className="text-white text-3xl font-bold">Bloom Books</Link>
                     <Favorites visible />
                 </div>
-                <Search />
+                <Suspense>
+                    <Search />
+                </Suspense>
                 <Favorites />
             </div>
-            <ContainerTitle />
+            <Suspense>
+                <ContainerTitle />
+            </Suspense>
         </>
     )
 }

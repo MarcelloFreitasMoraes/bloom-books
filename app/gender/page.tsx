@@ -3,6 +3,7 @@ import fetchGender from "../service/get-gender";
 import Pagination from "@/components/pagination";
 import GenderGrid from "./components/card-gender-grid";
 import { ITEMS_LIMIT, PAGE } from "../utils/items-limit";
+import { Suspense } from "react";
 
 interface GenderPageProps {
   searchParams: Promise<{
@@ -49,10 +50,12 @@ const GenderPage = async ({ searchParams }: GenderPageProps) => {
 
   return (
     <div>
+      <Suspense>
       {list && <GenderLine data={paginatedResults} url={url} />}
       {grid && <GenderGrid data={paginatedResults} url={url} />}
 
       {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} />}
+      </Suspense>
     </div>
   );
 };
